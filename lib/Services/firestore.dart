@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lean_cubator/Models/chat.dart';
 import 'package:lean_cubator/Models/todo.dart';
-import 'package:lean_cubator/Models/user.dart';
+import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/userfile.dart';
 
 class DBFireStore{
@@ -38,9 +38,9 @@ class DBFireStore{
     var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("file").doc();
     filepath.set(file.toJson());
   }
-  Future<User> loadOpeningTimes(String userID) async {
+  Future<CustomUser> loadOpeningTimes(String userID) async {
     QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: userID).get();
-    return User.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);//Vermutlich fehlerhaft
+    return CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);//Vermutlich fehlerhaft
   }
 
 

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+
+import 'Pages/task_page.dart';
+import 'Pages/welcome.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +31,7 @@ Widget build(BuildContext context) {
           initialRoute: WelcomePage.id,
           routes: {
             WelcomePage.id: (context) => WelcomePage(),
+            TaskPage.id: (cotext) => TaskPage(),
           },
 
         );

@@ -1,16 +1,16 @@
-class User{
+class CustomUser{
 
   String name;
   String email;
   String team;
 
-  User({
+  CustomUser({
     required this.name,
     required this.email,
     required this.team,
   });
 
-  User.fromJson(Map<String, dynamic> json)
+  CustomUser.fromJson(Map<String, dynamic> json)
       : this(
     name: json['name'] as String,
     email: json['email'] as String,

@@ -5,6 +5,7 @@ import 'package:lean_cubator/components/chat_container.dart';
 import '../components/file_container.dart';
 
 class TaskPage extends StatefulWidget {
+  static String id = "TaskPage";
   @override
   _TaskContainerState createState() => _TaskContainerState();
 }
