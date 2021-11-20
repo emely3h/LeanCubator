@@ -22,12 +22,14 @@ class _TaskContainerState extends State<TaskPage>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Card(
-            child: SizedBox(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Container(height: 400, color: Colors.red),
+            Card(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Column(
                   children: [
@@ -64,9 +66,12 @@ class _TaskContainerState extends State<TaskPage>
                       ),
                     ),
                   ],
-                )),
-          )
-        ],
+                ),
+              ),
+            ),
+           
+          ],
+        ),
       ),
     );
   }
