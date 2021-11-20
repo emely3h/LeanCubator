@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lean_cubator/Pages/todolist.dart';
 import 'package:lean_cubator/components/chat_container.dart';
 
 import '../components/file_container.dart';
@@ -56,15 +57,7 @@ class _TaskContainerState extends State<TaskPage>
                       child: new TabBarView(
                         controller: _controller,
                         children: <Widget>[
-                          Card(
-                            child: new ListTile(
-                              leading: const Icon(Icons.task),
-                              title: new TextField(
-                                decoration: const InputDecoration(
-                                    hintText: 'Some todos...'),
-                              ),
-                            ),
-                          ),
+                          TodoList(),
                           FileContainer(),
                           ChatContainer()
                         ],

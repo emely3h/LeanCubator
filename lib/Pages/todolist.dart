@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lean_cubator/Models/todo.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:intl/intl.dart';
 
 class TodoWidget extends StatefulWidget {
   final Todo todo;
@@ -10,7 +9,8 @@ class TodoWidget extends StatefulWidget {
   TodoWidget({required this.todo, required this.parentState});
 
   @override
-  TodoWidgetState createState() => TodoWidgetState(todo: todo, parentState:parentState);
+  TodoWidgetState createState() =>
+      TodoWidgetState(todo: todo, parentState: parentState);
 }
 
 class TodoWidgetState extends State<TodoWidget> {
@@ -21,27 +21,36 @@ class TodoWidgetState extends State<TodoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Row(children: [
-      Text(todo.title + ' '),
-      Text(DateFormat('dd-MM-yyyy').format(DateTime.fromMillisecondsSinceEpoch(todo.creationtime)) + ' '),
-      Text(DateFormat('dd-MM-yyyy').format(DateTime.fromMillisecondsSinceEpoch(todo.deatlinetime)) + ' '),
-      const Text('Finished '),
-      Checkbox(
-          value: todo.status,
-          onChanged: (value) {
-            setState(() {
-              todo.status = value!;
-            });
-          }),
-                  ElevatedButton(
-            child: Text('Remove'),
-            onPressed: () {
-              parentState._removeItem(todo);
-            },
-          )
-    ])
-        //  DateFormat('dd MMMM, yyyy').format(args.value)
-        );
+      child: Row(
+        children: [
+          ListTile(
+            leading: Checkbox(
+                value: todo.status,
+                onChanged: (value) {
+                  setState(() {
+                    todo.status = value!;
+                  });
+                }),
+            title: Column(
+              children: [
+                Text(todo.title),
+                Text(((todo.deatlinetime - todo.creationtime) /
+                            (24 * 60 * 60 * 1000))
+                        .toStringAsFixed(0) +
+                    ' Days left'),
+              ],
+            ),
+            trailing: InkWell(
+              child: Icon(Icons.delete),
+              onTap: () {
+                parentState._removeItem(todo);
+              },
+            ),
+          ),
+        ],
+      ),
+      //  DateFormat('dd MMMM, yyyy').format(args.value)
+    );
   }
 }
 
@@ -58,23 +67,40 @@ class _TodoListState extends State<TodoList> {
   final TextEditingController _textFieldController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('To-Do List')),
-        body: Column(children: [
-          Expanded(child: Container(child: ListView(children: _getItems()))),
-          ElevatedButton(
-            child: Text('Add Item'),
-            onPressed: () {
-              _displayTextInputDialog(context);
-            },
-          )
-        ]));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 300,
+          child: ListView(
+            children: _getItems(),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(20),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {
+                  _displayTextInputDialog(context);
+                },
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   void _removeItem(Todo todo) {
-       setState(() {
+    print('länge: ' + _todoList.length.toString());
+    setState(() {
       _todoList.remove(todo);
     });
+    print('länge: ' + _todoList.length.toString());
   }
 
   void _addTodoItem(Todo todo) {
@@ -91,7 +117,7 @@ class _TodoListState extends State<TodoList> {
     final List<Widget> _todoWidgets = <Widget>[];
     for (Todo todo in _todoList) {
       // _todoWidgets.add(TodoWidget(todo:todo));
-      _todoWidgets.add(TodoWidget(todo: todo,parentState:this));
+      _todoWidgets.add(TodoWidget(todo: todo, parentState: this));
     }
     return _todoWidgets;
   }
