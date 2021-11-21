@@ -1,9 +1,11 @@
 
 import 'package:lean_cubator/Models/task.dart';
+
+import 'package:lean_cubator/Models/task.dart';
 import 'package:lean_cubator/Models/todo.dart';
 
 class TodoListData {
-  static List<Task> list = [Task(headline:"Interviews", body:"Interview Questions", help:false,number: 0),
+  static List<Task> list = [Task(headline:"Interviews", body:"Interview Questions", help:false,number: 0,),
   Task(headline:"Surveys", body:"Surveys", help:false,number: 0),
   Task(headline:"Business plan", body:"Business plan", help:false,number: 0)];
 

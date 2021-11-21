@@ -7,8 +7,7 @@ import 'package:getwidget/components/dropdown/gf_multiselect.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/project.dart';
 
-<<<<<<< HEAD
-=======
+
 class ProjectData {
   static List<Project> projects = [Project(
         info:
@@ -42,7 +41,7 @@ class ProjectData {
 }
 
 
->>>>>>> a078349464c85578755b00b516b6d422f7a78d6c
+
 class ProjectOverview extends StatefulWidget {
   @override
   ProjectOverviewState createState() =>
