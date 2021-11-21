@@ -1,4 +1,4 @@
-# lean_cubator
+# Leancubator
 
 The LeanCubator is a new, entirely remote start-up incubator that helps you to kick-start your own business from anywhere, at your own speed.
 
