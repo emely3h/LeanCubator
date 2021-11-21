@@ -75,6 +75,7 @@ class _TodoListState extends State<TodoList> {
       children: [
         Container(
           height: 300,
+          width: 500,
           child: ListView(
             children: _getItems(),
           ),

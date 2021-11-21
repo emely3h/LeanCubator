@@ -10,7 +10,7 @@ import 'package:lean_cubator/Pages/home.dart';
 import 'package:lean_cubator/Models/team.dart';
 
 import 'package:lean_cubator/Pages/task_page.dart';
-import 'package:lean_cubator/Pages/timeline.dart';
+import 'package:lean_cubator/Pages/process_timeline_page.dart';
 import 'package:lean_cubator/Providor/google_sign_in.dart';
 import 'package:lean_cubator/Services/firestore.dart';
 import 'package:provider/provider.dart';

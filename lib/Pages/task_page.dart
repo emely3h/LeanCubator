@@ -63,7 +63,7 @@ class _TaskContainerState extends State<TaskPage>
                         ),
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.55,
                         child: new TabBarView(
                           controller: _controller,
                           children: <Widget>[
