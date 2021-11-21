@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'Pages/home.dart';
 import 'Pages/settings.dart';
 import 'Pages/task_page.dart';
+import 'Pages/timeline.dart';
 import 'Pages/welcome.dart';
 
 Future<void> main() async {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         
         TaskPage.id: (cotext) => TaskPage(),
         SettingsPage.id: (context) => SettingsPage(),
+        ProcessTimelinePage.id: (context) => ProcessTimelinePage(),
       },
     );
   }

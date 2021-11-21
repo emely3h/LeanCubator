@@ -10,16 +10,18 @@ import 'package:lean_cubator/Pages/home.dart';
 import 'package:lean_cubator/Models/team.dart';
 
 import 'package:lean_cubator/Pages/task_page.dart';
+import 'package:lean_cubator/Pages/timeline.dart';
 import 'package:lean_cubator/Providor/google_sign_in.dart';
 import 'package:lean_cubator/Services/firestore.dart';
 import 'package:provider/provider.dart';
 
 class SignUpWidget extends StatelessWidget {
   late TextEditingController _controller1;
-  late CustomUser user;
-  late Team team;
   late TextEditingController _controller2;
-  late DBFireStore dbFireStore;
+
+  static late CustomUser user;
+  static late Team team;
+  static late DBFireStore dbFireStore;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,7 @@ class SignUpWidget extends StatelessWidget {
                 Navigator.pushNamed(context, Home.id);
 
                 team = await dbFireStore.loadTeam(_controller2.text);
-                Navigator.pushNamed(context, Home.id);
+                Navigator.pushNamed(context, ProcessTimelinePage.id);
 
               }
               ;
