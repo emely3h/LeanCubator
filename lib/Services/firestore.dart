@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lean_cubator/Models/chat.dart';
 import 'package:lean_cubator/Models/team.dart';
@@ -39,28 +41,28 @@ class DBFireStore{
     var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("file").doc();
     filepath.set(file.toJson());
   }
-  Future<CustomUser> loadOpeningTimes(String username) async {
+  Future<CustomUser> loadCustomUser(String username) async {
     QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: username).get();
     return CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);//ToDo: Vermutlich fehlerhaft
   }
 
-  Future<Team> loadTeam(String username, String team) async {
-    //QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: username).get();
-    //CustomUser customUser = CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);
-    DocumentSnapshot<Object> documentSnapshot = await _firestore.collection("teams").doc(team).get();
-    return Team.fromJson(documentSnapshot as Map<String, dynamic>);//ToDo: Vermutlich fehlerhaft
+
+  Future<Team> loadTeam(String team) async {
+    var openingTimes = _firestore.collection("teams").doc(team);
+    DocumentSnapshot<Object> documentSnapshot = await openingTimes.get();
+    return Team.fromJson(documentSnapshot.data()  as Map<String, dynamic>);
   }
 
   saveNewTeamMember(String username, String teamName) async{
     Team teamElement;
     var teampath = _firestore.collection("team").doc(teamName);
     try{
-      teamElement = await loadTeam(username, teamName);
-      teamElement.userIDs.add(username);
+      teamElement = await loadTeam(teamName);
+      teamElement.users.add(username);
     }
     catch(e){
       print(e.toString());
-      teamElement = Team(userIDs: [username], projectID: teamName);
+      teamElement = Team(users: [username], projectID: teamName);
     }
     teampath.set(teamElement.toJson());
   }

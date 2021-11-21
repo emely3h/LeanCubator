@@ -1,21 +1,22 @@
 class Team{
 
-  List<String> userIDs;
+  List<String> users;
   String projectID;
 
   Team({
-    required this.userIDs,
+    required this.users,
     required this.projectID,
   });
 
   Team.fromJson(Map<String, dynamic> json)
       : this(
-    userIDs: json['userIDs'].cast<String>(),
+    users: json['users'].cast<String>(),
     projectID: json['projectID'] as String,
   );
 
+
   Map<String, dynamic> toJson() => {
-    'userIDs': userIDs,
+    'users': users,
     'projectID': projectID,
   };
 

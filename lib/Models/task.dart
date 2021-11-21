@@ -6,26 +6,35 @@ import 'chat.dart';
 
 class Task{
 
-  String _headline = "";
-  String _body = "";
+  String headline = "";
+  String body = "";
+  num number = 0;
   List<Todo> _todos = [];
   List<Chat> _chats = [];
   List<UserFile> _userfiles = [];
-  bool _help = false;
+  bool help = false;
 
+  Task({
+    required this.headline,
+    required this.body,
+    required this.number,
+    required this.help,
+  });
 
+  Task.fromJson(Map<String, dynamic> json)
+      : this(
+    headline: json['headline'] as String,
+    body: json['body'] as String,
+    number: json['number'] as num,
+    help: json['help'] as bool,
+  );
 
-  bool get help => _help;
-
-  set help(bool value) {
-    _help = value;
-  }
-
-  String get body => _body;
-
-  set body(String value) {
-    _body = value;
-  }
+  Map<String, dynamic> toJson() => {
+    'headline': headline,
+    'body': body,
+    'number': number,
+    'help': help,
+  };
 
   List<Todo> get todos => _todos;
 
@@ -37,12 +46,6 @@ class Task{
 
   set userfiles(List<UserFile> value) {
     _userfiles = value;
-  }
-
-  String get headline => _headline;
-
-  set headline(String value) {
-    _headline = value;
   }
 
   List<Chat> get chats => _chats;
