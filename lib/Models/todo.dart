@@ -1,11 +1,13 @@
 class Todo{
 
   String title;
+  String notes;
   bool status;
   int deatlinetime;
   int creationtime;
 
   Todo({
+    required this.notes,
     required this.status,
     required this.title,
     required this.deatlinetime,
@@ -18,6 +20,7 @@ class Todo{
     status: json['status'] as bool,
     deatlinetime: json['deatlinetime'] as int,
     creationtime: json['creationtime'] as int,
+    notes: json['notes'] as String
   );
 
   Map<String, dynamic> toJson() => {
@@ -25,7 +28,6 @@ class Todo{
     'status': status,
     'deatlinetime': deatlinetime,
     'creationtime': creationtime,
+    'notes': notes
   };
-
-
 }

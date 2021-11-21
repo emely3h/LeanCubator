@@ -21,8 +21,7 @@ class TodoWidgetState extends State<TodoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: [
+      child: 
           ListTile(
             leading: Checkbox(
                 value: todo.status,
@@ -47,8 +46,6 @@ class TodoWidgetState extends State<TodoWidget> {
               },
             ),
           ),
-        ],
-      ),
       //  DateFormat('dd MMMM, yyyy').format(args.value)
     );
   }
@@ -161,7 +158,8 @@ class _TodoListState extends State<TodoList> {
                         creationtime: DateTime.now().millisecondsSinceEpoch,
                         status: false,
                         title: title,
-                        deatlinetime: completionTime));
+                        deatlinetime: completionTime,
+                        notes: ""));
                     Navigator.pop(context);
                   });
                 },
