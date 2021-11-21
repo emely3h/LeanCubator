@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 
 import 'Pages/home.dart';
+import 'Pages/settings.dart';
 import 'Pages/task_page.dart';
 import 'Pages/welcome.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         WelcomePage.id: (context) => WelcomePage(),
         Home.id: (context) => Home(),
         TaskPage.id: (cotext) => TaskPage(),
+        SettingsPage.id: (context) => SettingsPage(),
       },
     );
   }
