@@ -158,7 +158,8 @@ class _TodoListState extends State<TodoList> {
                         creationtime: DateTime.now().millisecondsSinceEpoch,
                         status: false,
                         title: title,
-                        deatlinetime: completionTime));
+                        deatlinetime: completionTime,
+                        notes: ""));
                     Navigator.pop(context);
                   });
                 },
