@@ -4,7 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
+
+import 'package:lean_cubator/Pages/home.dart';
+
 import 'package:lean_cubator/Models/team.dart';
+
 import 'package:lean_cubator/Pages/task_page.dart';
 import 'package:lean_cubator/Providor/google_sign_in.dart';
 import 'package:lean_cubator/Services/firestore.dart';
@@ -93,8 +97,12 @@ class SignUpWidget extends StatelessWidget {
                     email: '',
                     team: _controller2.text);
 
+
+                Navigator.pushNamed(context, Home.id);
+
                 team = await dbFireStore.loadTeam(_controller2.text);
-                Navigator.pushNamed(context, TaskPage.id);
+                Navigator.pushNamed(context, Home.id);
+
               }
               ;
             },

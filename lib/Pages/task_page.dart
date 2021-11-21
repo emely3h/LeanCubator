@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lean_cubator/Pages/todolist.dart';
 import 'package:lean_cubator/components/chat_container.dart';
+import 'package:lean_cubator/components/task_info_dummy.dart';
 
 import '../components/file_container.dart';
 
@@ -22,56 +23,62 @@ class _TaskContainerState extends State<TaskPage>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Container(height: 400, color: Colors.red),
-            Card(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: new BoxDecoration(
-                          color: Theme.of(context).primaryColor),
-                      child: new TabBar(
-                        controller: _controller,
-                        tabs: [
-                          new Tab(
-                            icon: const Icon(Icons.task),
-                            text: 'Todos',
-                          ),
-                          new Tab(
-                            icon: const Icon(Icons.file_copy),
-                            text: 'Files',
-                          ),
-                          new Tab(
-                            icon: const Icon(Icons.message),
-                            text: 'Chat',
-                          ),
-                        ],
+    return Container(
+      margin: EdgeInsets.all(30),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 30),
+              TaskInfoDummy(),
+              SizedBox(height: 30),
+              Card(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: new BoxDecoration(
+                            color: Theme.of(context).primaryColor),
+                        child: new TabBar(
+                          controller: _controller,
+                          tabs: [
+                            new Tab(
+                              icon: const Icon(Icons.task),
+                              text: 'Todos',
+                            ),
+                            new Tab(
+                              icon: const Icon(Icons.file_copy),
+                              text: 'Files',
+                            ),
+                            new Tab(
+                              icon: const Icon(Icons.message),
+                              text: 'Chat',
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      child: new TabBarView(
-                        controller: _controller,
-                        children: <Widget>[
-                          TodoList(),
-                          FileContainer(),
-                          ChatContainer()
-                        ],
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: new TabBarView(
+                          controller: _controller,
+                          children: <Widget>[
+                            TodoList(),
+                            FileContainer(),
+                            ChatContainer()
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-           
-          ],
+              SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
