@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lean_cubator/Pages/process_timeline_page.dart';
 import 'package:lean_cubator/Pages/project_overview.dart';
 import 'package:lean_cubator/Pages/settings.dart';
 import 'package:lean_cubator/Pages/task_page.dart';
@@ -7,14 +8,14 @@ import 'package:lean_cubator/Pages/your_project.dart';
 
 class Home extends StatefulWidget {
   static String id = "Layout";
-
+static Widget current_page = TestStage();
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   List<String> pages = ['TaskInfoDummy.id', 'SettingsPage.id'];
-  Widget current_page = TestStage();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,8 @@ class _HomeState extends State<Home> {
               title: const Text('My Project'),
               onTap: () {
                 setState(() {
-                  current_page = TaskPage();
+                  //current_page = TaskPage();
+                  Home.current_page = ProcessTimelinePage();
                 });
               },
             ),
@@ -50,7 +52,7 @@ class _HomeState extends State<Home> {
               title: const Text('Other Projects'),
               onTap: () {
                 setState(() {
-                  current_page = ProjectOverview();
+                  Home.current_page = ProjectOverview();
                 });
               },
             ),
@@ -61,7 +63,8 @@ class _HomeState extends State<Home> {
                 // ...
                 //Navigator.pushNamed(context, pages[1]);
                 setState(() {
-                  current_page = TestStage();
+                  
+                  Home.current_page = TestStage();
                 });
               },
             ),
@@ -72,14 +75,14 @@ class _HomeState extends State<Home> {
                 // ...
                 // Navigator.pushNamed(context, pages[1]);
                 setState(() {
-                  current_page = SettingsPage();
+                  Home.current_page = SettingsPage();
                 });
               },
             ),
           ],
         ),
       ),
-      body: current_page,
+      body: Home.current_page,
     );
   }
 }

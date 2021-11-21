@@ -70,6 +70,7 @@ class _ChatContainerState extends State<ChatContainer> {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: 900,

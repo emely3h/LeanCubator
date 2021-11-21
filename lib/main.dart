@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'Pages/home.dart';
 import 'Pages/settings.dart';
 import 'Pages/task_page.dart';
-import 'Pages/timeline.dart';
+import 'Pages/process_timeline_page.dart';
 import 'Pages/welcome.dart';
 
 Future<void> main() async {
