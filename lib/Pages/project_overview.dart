@@ -7,16 +7,6 @@ import 'package:getwidget/components/dropdown/gf_multiselect.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/project.dart';
 
-void main() {
-  runApp(OV());
-}
-
-class OV extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: ProjectOverview());
-  }
-}
 
 class ProjectOverview extends StatefulWidget {
   @override

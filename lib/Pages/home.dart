@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lean_cubator/Pages/project_overview.dart';
 import 'package:lean_cubator/Pages/settings.dart';
 import 'package:lean_cubator/Pages/task_page.dart';
 import 'package:lean_cubator/Pages/test_stage.dart';
@@ -40,15 +41,16 @@ class _HomeState extends State<Home> {
               title: const Text('Your Project'),
               onTap: () {
                 setState(() {
-                  current_page = YourProject();
+                  current_page = TaskPage();
                 });
               },
             ),
             ListTile(
               title: const Text('Other Projects'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                setState(() {
+                  current_page = ProjectOverview();
+                });
               },
             ),
             ListTile(
