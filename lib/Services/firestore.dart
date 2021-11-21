@@ -11,8 +11,17 @@ class DBFireStore{
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+
+  saveTodoEntry(Todo todo, String taskID, String projectID){
+    var todopath = _firestore.collection("project").doc(projectID).collection("task").doc();
+    todopath.set(todo.toJson());
+  }
+  Stream<QuerySnapshot> todoStream(String projectID) {
+    return _firestore.collection("project").doc(projectID).collection("task").orderBy('number').snapshots();
+  }
+
   saveChatMessage(Chat chat, String taskID, String projectID){
-    var chatpath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("chat").doc();
+    var chatpath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("chats").doc();
     chatpath.set(chat.toJson());
   }
   Stream<QuerySnapshot> chatStream(String taskID, String projectID) {
@@ -20,25 +29,16 @@ class DBFireStore{
   }
 
 
-  saveTodoEntry(Todo todo, String taskID, String projectID){
-    var todopath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("todo").doc();
-    todopath.set(todo.toJson());
-  }
-  Stream<QuerySnapshot> todoStream(String taskID, String projectID) {
-    return _firestore.collection("project").doc(projectID).collection("task").orderBy('createdAt',descending: true).limitToLast(20).snapshots();
-  }
-
-
   saveFilesEntry(UserFile file, String taskID, String projectID){
-    var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("file").doc();
+    var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("files").doc();
     filepath.set(file.toJson());
   }
   Stream<QuerySnapshot> fileStream(String taskID, String projectID) {
-    return _firestore.collection("project").doc(projectID).collection("task").orderBy('createdAt',descending: true).limitToLast(20).snapshots();
+    return _firestore.collection("project").doc(projectID).collection("task").snapshots();
   }
 
   saveUser(UserFile file, String taskID, String projectID){
-    var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("file").doc();
+    var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("userfiles").doc();
     filepath.set(file.toJson());
   }
   Future<CustomUser> loadCustomUser(String username) async {
@@ -55,7 +55,7 @@ class DBFireStore{
 
   saveNewTeamMember(String username, String teamName) async{
     Team teamElement;
-    var teampath = _firestore.collection("team").doc(teamName);
+    var teampath = _firestore.collection("teams").doc(teamName);
     try{
       teamElement = await loadTeam(teamName);
       teamElement.users.add(username);
