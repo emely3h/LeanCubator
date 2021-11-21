@@ -4,21 +4,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
+
 import 'package:lean_cubator/Pages/home.dart';
+
+import 'package:lean_cubator/Models/team.dart';
+
 import 'package:lean_cubator/Pages/task_page.dart';
 import 'package:lean_cubator/Providor/google_sign_in.dart';
+import 'package:lean_cubator/Services/firestore.dart';
 import 'package:provider/provider.dart';
 
 class SignUpWidget extends StatelessWidget {
   late TextEditingController _controller1;
   late CustomUser user;
-
+  late Team team;
   late TextEditingController _controller2;
+  late DBFireStore dbFireStore;
 
   @override
   Widget build(BuildContext context) {
     _controller1 = TextEditingController();
     _controller2 = TextEditingController();
+    dbFireStore = DBFireStore();
     return Padding(
       padding: EdgeInsets.all(32),
       child: Column(
@@ -59,7 +66,7 @@ class SignUpWidget extends StatelessWidget {
           ),
           SizedBox(height: 20),
           ElevatedButton.icon(
-            onPressed: () {
+            onPressed: () async {
               if (_controller1.text == '' || _controller1.text == '') {
                 showDialog(
                   context: context,
@@ -90,7 +97,12 @@ class SignUpWidget extends StatelessWidget {
                     email: '',
                     team: _controller2.text);
 
+
                 Navigator.pushNamed(context, Home.id);
+
+                team = await dbFireStore.loadTeam(_controller2.text);
+                Navigator.pushNamed(context, Home.id);
+
               }
               ;
             },
