@@ -1,6 +1,13 @@
 # lean_cubator
 
-A new Flutter project.
+The LeanCubator is a new, entirely remote start-up incubator that helps you to kick-start your own business from anywhere, at your own speed.
+
+Get individualized, data-driven feedback from peers and professionals while being guided all the way from ideation and validation to your perfect pitch.
+
+## tech stack
+- Flutter
+- Dart
+- Firebase
 
 ## Getting Started
 
