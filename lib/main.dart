@@ -30,8 +30,9 @@ class MyApp extends StatelessWidget {
       // OnBoarding open one time
       initialRoute: WelcomePage.id,
       routes: {
-        WelcomePage.id: (context) => WelcomePage(),
         Home.id: (context) => Home(),
+        WelcomePage.id: (context) => WelcomePage(),
+        
         TaskPage.id: (cotext) => TaskPage(),
         SettingsPage.id: (context) => SettingsPage(),
         ProcessTimelinePage.id: (context) => ProcessTimelinePage(),

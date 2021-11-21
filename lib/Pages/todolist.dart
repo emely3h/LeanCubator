@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:lean_cubator/Models/task.dart';
 import 'package:lean_cubator/Models/todo.dart';
+import 'package:lean_cubator/Models/todolistdata.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TodoWidget extends StatefulWidget {
@@ -21,8 +23,7 @@ class TodoWidgetState extends State<TodoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: [
+      child: 
           ListTile(
             leading: Checkbox(
                 value: todo.status,
@@ -47,21 +48,22 @@ class TodoWidgetState extends State<TodoWidget> {
               },
             ),
           ),
-        ],
-      ),
       //  DateFormat('dd MMMM, yyyy').format(args.value)
     );
   }
 }
 
 class TodoList extends StatefulWidget {
+    final List<Todo> todoList;
+  TodoList({required this.todoList});
   @override
-  _TodoListState createState() => _TodoListState();
+  _TodoListState createState() => _TodoListState(todoList:todoList);
 }
 
 class _TodoListState extends State<TodoList> {
   // save data
-  final List<Todo> _todoList = <Todo>[];
+  final List<Todo> todoList;
+  _TodoListState({required this.todoList});
   // text field
   final TextEditingController _textFieldController = TextEditingController();
   final TextEditingController _textFieldController2 = TextEditingController();
@@ -96,18 +98,16 @@ class _TodoListState extends State<TodoList> {
   }
 
   void _removeItem(Todo todo) {
-    print('länge: ' + _todoList.length.toString());
     setState(() {
-      _todoList.remove(todo);
+      todoList.remove(todo);
     });
-    print('länge: ' + _todoList.length.toString());
   }
 
   void _addTodoItem(Todo todo) {
     // Wrapping it inside a set state will notify
     // the app that the state has changed
     setState(() {
-      _todoList.add(todo);
+      todoList.add(todo);
     });
     _textFieldController.clear();
   }
@@ -115,7 +115,7 @@ class _TodoListState extends State<TodoList> {
   // iterates through our todo list title
   List<Widget> _getItems() {
     final List<Widget> _todoWidgets = <Widget>[];
-    for (Todo todo in _todoList) {
+    for (Todo todo in todoList) {
       // _todoWidgets.add(TodoWidget(todo:todo));
       _todoWidgets.add(TodoWidget(todo: todo, parentState: this));
     }
@@ -161,7 +161,8 @@ class _TodoListState extends State<TodoList> {
                         creationtime: DateTime.now().millisecondsSinceEpoch,
                         status: false,
                         title: title,
-                        deatlinetime: completionTime));
+                        deatlinetime: completionTime,
+                        notes: ""));
                     Navigator.pop(context);
                   });
                 },
