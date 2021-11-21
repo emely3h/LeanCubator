@@ -19,46 +19,90 @@ class TodoWidgetState extends State<TodoWidget> {
   Todo todo;
   _TodoListState parentState;
   TodoWidgetState({required this.todo, required this.parentState});
-
+  final TextEditingController _textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _textFieldController.text = todo.notes;
     return Container(
-      width: 30,
-      child: 
-          ListTile(
-            leading: Checkbox(
-                value: todo.status,
-                onChanged: (value) {
-                  setState(() {
-                    todo.status = value!;
-                  });
-                }),
-            title: Column(
-              children: [
-                Text(todo.title),
-                Text(((todo.deatlinetime - todo.creationtime) /
-                            (24 * 60 * 60 * 1000))
-                        .toStringAsFixed(0) +
-                    ' Days left'),
-              ],
-            ),
-            trailing: InkWell(
-              child: Icon(Icons.delete),
-              onTap: () {
-                parentState._removeItem(todo);
-              },
-            ),
-          ),
+      child: ListTile(
+        leading: Checkbox(
+            value: todo.status,
+            onChanged: (value) {
+              setState(() {
+                todo.status = value!;
+              });
+            }),
+        title: Column(
+          children: [
+            Text(todo.title),
+            Text(((todo.deatlinetime - todo.creationtime) /
+                        (24 * 60 * 60 * 1000))
+                    .toStringAsFixed(0) +
+                ' Days left'),
+          ],
+        ),
+        trailing: InkWell(
+          child: Icon(Icons.delete),
+          onTap: () {
+            parentState._removeItem(todo);
+          },
+        ),
+        onTap: () {
+          _displayTextInputDialog(context);
+        },
+      ),
       //  DateFormat('dd MMMM, yyyy').format(args.value)
     );
+  }
+
+  late String notes;
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Notes'),
+            content: Container(
+                child: Column(children: [
+              TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                onChanged: (value) {
+                  notes = value;
+                  todo.notes = value;
+                },
+                controller: _textFieldController,
+                decoration: InputDecoration(hintText: "notes"),
+              ),
+            ])),
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: Text('Save'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
   }
 }
 
 class TodoList extends StatefulWidget {
-    final List<Todo> todoList;
+  final List<Todo> todoList;
   TodoList({required this.todoList});
   @override
-  _TodoListState createState() => _TodoListState(todoList:todoList);
+  _TodoListState createState() => _TodoListState(todoList: todoList);
 }
 
 class _TodoListState extends State<TodoList> {

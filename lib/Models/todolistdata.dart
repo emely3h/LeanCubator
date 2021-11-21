@@ -22,19 +22,19 @@ class TodoListData {
   static void SetTodos() {
     list[0].todos = [
       Todo(
-          notes: "notes",
+          notes: "notes1",
           deatlinetime: 100000000,
           status: false,
           creationtime: 3,
           title: "Find partner"),
       Todo(
-          notes: "notes",
+          notes: "notes2",
           deatlinetime: 150000000,
           status: false,
           creationtime: 3,
           title: "make interview"),
       Todo(
-          notes: "notes",
+          notes: "notes3",
           deatlinetime: 305000000,
           status: false,
           creationtime: 3,
@@ -42,7 +42,7 @@ class TodoListData {
     ];
     list[1].todos = [
       Todo(
-          notes: "notes",
+          notes: "notes2",
           deatlinetime: 1000000000,
           status: false,
           creationtime: 3,
@@ -62,7 +62,7 @@ class TodoListData {
     ];
     list[2].todos = [
       Todo(
-          notes: "notes",
+          notes: "notes3",
           deatlinetime: 10000000000,
           status: false,
           creationtime: 3,
