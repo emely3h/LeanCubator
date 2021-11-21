@@ -5,7 +5,6 @@ import 'package:lean_cubator/Pages/task_page.dart';
 import 'package:lean_cubator/Pages/test_stage.dart';
 import 'package:lean_cubator/Pages/your_project.dart';
 
-
 class Home extends StatefulWidget {
   static String id = "Layout";
 
@@ -21,7 +20,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Leancubator'),
+        title: const Text('Leancubator',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -35,10 +35,11 @@ class _HomeState extends State<Home> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Aalto Venture Program'),
+              child: Text('Aalto Venture Program',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             ),
             ListTile(
-              title: const Text('Your Project'),
+              title: const Text('My Project'),
               onTap: () {
                 setState(() {
                   current_page = TaskPage();
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
               onTap: () {
                 // Update the state of the app.
                 // ...
-               // Navigator.pushNamed(context, pages[1]);
+                // Navigator.pushNamed(context, pages[1]);
                 setState(() {
                   current_page = SettingsPage();
                 });

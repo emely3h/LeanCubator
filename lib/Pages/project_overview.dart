@@ -7,7 +7,6 @@ import 'package:getwidget/components/dropdown/gf_multiselect.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/project.dart';
 
-
 class ProjectOverview extends StatefulWidget {
   @override
   ProjectOverviewState createState() =>
@@ -74,7 +73,7 @@ class ProjectOverview extends StatefulWidget {
 class ProjectOverviewState extends State<ProjectOverview> {
   TextEditingController editingController = TextEditingController();
   TextEditingController _textFieldController2 = TextEditingController();
-    TextEditingController _textFieldController = TextEditingController();
+  TextEditingController _textFieldController = TextEditingController();
   List<Project> projects = [];
   List<Project> viewable = [];
 
@@ -85,59 +84,64 @@ class ProjectOverviewState extends State<ProjectOverview> {
   }
 
   void addProject(Project project) {
-      projects.add(project);
-      viewable = projects
-                      .where((element) => element.name
-                          .toLowerCase()
-                          .contains(currentFilter.toLowerCase()))
-                      .toList();
+    projects.add(project);
+    viewable = projects
+        .where((element) =>
+            element.name.toLowerCase().contains(currentFilter.toLowerCase()))
+        .toList();
   }
 
   late String currentFilter = "";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('Overview')),
-        body: Column(children: [
-          Container(
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  currentFilter = value;
-                  viewable = projects
-                      .where((element) => element.name
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
-                      .toList();
-                });
-              },
-              controller: editingController,
-              decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-            ),
-          ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: viewable.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return createListTile(viewable[index]);
-                  })),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: () {
-                  _displayTextInputDialog(context);
+    return Center(
+      child: Container(
+          margin: EdgeInsets.all(100),
+          child: Column(children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 50),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    currentFilter = value;
+                    viewable = projects
+                        .where((element) => element.name
+                            .toLowerCase()
+                            .contains(value.toLowerCase()))
+                        .toList();
+                  });
                 },
+                controller: editingController,
+                decoration: InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
               ),
-            ],
-          ),
-        ]));
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: viewable.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return createListTile(viewable[index]);
+                    })),
+            Container(
+              height: 50,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    _displayTextInputDialog(context);
+                  },
+                ),
+              ],
+            ),
+          ])),
+    );
   }
 
   late String name;
@@ -158,7 +162,7 @@ class ProjectOverviewState extends State<ProjectOverview> {
                 },
                 controller: _textFieldController2,
                 decoration: InputDecoration(hintText: "Name"),
-              ),              
+              ),
               TextField(
                 onChanged: (value) {
                   info = value;
@@ -179,9 +183,17 @@ class ProjectOverviewState extends State<ProjectOverview> {
               //         print("searchSource:" + val!);
               //         members = val!;
               //       }))
-              GFMultiSelect(items: users.map<String>((CustomUser value) {
-                 return value.name;
-               }).toList(), onSelect: (value) { members = value.cast<int>().map<String>((e) => users[e].name).toList(); },),
+              GFMultiSelect(
+                items: users.map<String>((CustomUser value) {
+                  return value.name;
+                }).toList(),
+                onSelect: (value) {
+                  members = value
+                      .cast<int>()
+                      .map<String>((e) => users[e].name)
+                      .toList();
+                },
+              ),
             ])),
             actions: <Widget>[
               ElevatedButton(
@@ -196,7 +208,12 @@ class ProjectOverviewState extends State<ProjectOverview> {
                 child: Text('OK'),
                 onPressed: () {
                   setState(() {
-                    addProject(Project(name: name, info: info, members: members, currentStage: "", active: true));
+                    addProject(Project(
+                        name: name,
+                        info: info,
+                        members: members,
+                        currentStage: "",
+                        active: true));
                     Navigator.pop(context);
                   });
                 },

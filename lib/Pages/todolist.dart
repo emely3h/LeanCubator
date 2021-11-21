@@ -23,6 +23,7 @@ class TodoWidgetState extends State<TodoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 30,
       child: 
           ListTile(
             leading: Checkbox(
