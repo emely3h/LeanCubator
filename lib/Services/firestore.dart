@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lean_cubator/Models/chat.dart';
+import 'package:lean_cubator/Models/team.dart';
 import 'package:lean_cubator/Models/todo.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/userfile.dart';
@@ -38,11 +39,31 @@ class DBFireStore{
     var filepath = _firestore.collection("project").doc(projectID).collection("task").doc(taskID).collection("file").doc();
     filepath.set(file.toJson());
   }
-  Future<CustomUser> loadOpeningTimes(String userID) async {
-    QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: userID).get();
-    return CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);//Vermutlich fehlerhaft
+  Future<CustomUser> loadOpeningTimes(String username) async {
+    QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: username).get();
+    return CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);//ToDo: Vermutlich fehlerhaft
   }
 
+  Future<Team> loadTeam(String username, String team) async {
+    //QuerySnapshot<Object> querySnapshot = await _firestore.collection("user").where('user', isEqualTo: username).get();
+    //CustomUser customUser = CustomUser.fromJson((querySnapshot.docs.first.data()) as Map<String, dynamic>);
+    DocumentSnapshot<Object> documentSnapshot = await _firestore.collection("teams").doc(team).get();
+    return Team.fromJson(documentSnapshot as Map<String, dynamic>);//ToDo: Vermutlich fehlerhaft
+  }
+
+  saveNewTeamMember(String username, String teamName) async{
+    Team teamElement;
+    var teampath = _firestore.collection("team").doc(teamName);
+    try{
+      teamElement = await loadTeam(username, teamName);
+      teamElement.userIDs.add(username);
+    }
+    catch(e){
+      print(e.toString());
+      teamElement = Team(userIDs: [username], projectID: teamName);
+    }
+    teampath.set(teamElement.toJson());
+  }
 
 
 }
