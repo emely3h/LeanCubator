@@ -7,42 +7,35 @@ import 'package:getwidget/components/dropdown/gf_multiselect.dart';
 import 'package:lean_cubator/Models/custom_user.dart';
 import 'package:lean_cubator/Models/project.dart';
 
-<<<<<<< HEAD
-=======
 class ProjectData {
-  static List<Project> projects = [Project(
-        info:
-            "info startup1",
+  static List<Project> projects = [
+    Project(
+        info: "info startup1",
         name: "Startup1",
         members: ["Person1", "Person2", "Person3"],
         currentStage: "Stage1",
         active: true),
-        Project(
-        info:
-            "info startup2",
+    Project(
+        info: "info startup2",
         name: "Startup2",
         members: ["Person1", "Person2", "Person3", "Person4"],
         currentStage: "Stage5",
         active: true),
-         Project(
-        info:
-            "info startup3",
+    Project(
+        info: "info startup3",
         name: "Startup3",
         members: ["Person1", "Person2"],
         currentStage: "Stage2",
         active: false),
-          Project(
-        info:
-            "info startup4",
+    Project(
+        info: "info startup4",
         name: "Startup4",
         members: ["Person1", "Person2"],
         currentStage: "Stage6",
         active: true),
-        ];
+  ];
 }
 
-
->>>>>>> a078349464c85578755b00b516b6d422f7a78d6c
 class ProjectOverview extends StatefulWidget {
   @override
   ProjectOverviewState createState() =>
