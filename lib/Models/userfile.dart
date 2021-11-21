@@ -13,7 +13,7 @@ class UserFile{
     name: json['name'] as String,
     link: json['link'] as String,
   );
-
+  
   Map<String, dynamic> toJson() => {
     'name': name,
     'link': link,
