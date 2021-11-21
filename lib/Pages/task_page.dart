@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lean_cubator/Models/todolistdata.dart';
 import 'package:lean_cubator/Pages/todolist.dart';
 import 'package:lean_cubator/components/chat_container.dart';
 import 'package:lean_cubator/components/task_info_dummy.dart';
@@ -66,7 +67,7 @@ class _TaskContainerState extends State<TaskPage>
                         child: new TabBarView(
                           controller: _controller,
                           children: <Widget>[
-                            TodoList(),
+                            TodoList(todoList:TodoListData.getTasks()[0].todos),
                             FileContainer(),
                             ChatContainer()
                           ],
